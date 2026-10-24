@@ -1,0 +1,557 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Fischer Steelworx</title>
+<meta name="description" content="Fischer Steelworx – Hobby-Schweißkunst aus Hermaringen. Schweißen, Metallkunst, Laserbeschriftung, Leder und vieles mehr. Handgemacht mit Liebe in Deutschland.">
+<meta name="theme-color" content="#16171a">
+<meta property="og:title" content="Fischer Steelworx">
+<meta property="og:description" content="Hobby-Schweißkunst aus Hermaringen – handgemacht mit Liebe in Deutschland.">
+<meta property="og:image" content="assets/logo.jpg">
+<link rel="icon" href="assets/logo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#16171a; --bg-2:#1d1f23; --card:#23252a; --card-2:#2a2d33;
+  --line:rgba(255,255,255,.08); --text:#f4f4f5; --muted:#a1a1aa;
+  --orange:#ff7a1a; --orange-2:#ffb347; --hot:#ffe2a8;
+  --radius:20px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif;line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+h1,h2,h3{font-family:"Space Grotesk",Inter,sans-serif;line-height:1.1;letter-spacing:-.02em}
+.wrap{width:100%;max-width:1080px;margin:0 auto;padding:0 16px}
+
+/* Noise / Stahl-Textur */
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+main,footer{position:relative;z-index:1}
+main{overflow-x:clip}
+
+/* ---------- HERO ---------- */
+.hero{position:relative;min-height:100svh;display:flex;align-items:center;justify-content:center;padding:56px 0 72px;overflow:hidden;isolation:isolate}
+.hero::after{content:"";position:absolute;inset:auto 0 0 0;height:180px;background:linear-gradient(transparent,var(--bg));z-index:-1}
+#sparks{position:absolute;inset:0;width:100%;height:100%;z-index:-2}
+.glow{position:absolute;width:520px;height:520px;border-radius:50%;filter:blur(90px);opacity:.35;z-index:-3;
+  background:radial-gradient(circle,var(--orange),transparent 65%);left:50%;top:22%;transform:translate(-50%,-50%);animation:breathe 4s ease-in-out infinite}
+@keyframes breathe{50%{opacity:.2;transform:translate(-50%,-50%) scale(1.15)}}
+
+.profile{width:100%;max-width:480px;margin:0 auto;text-align:center;padding:0 16px}
+.avatar{position:relative;width:150px;height:150px;margin:0 auto 22px}
+.avatar::before{content:"";position:absolute;inset:-5px;border-radius:50%;
+  background:conic-gradient(from 0deg,var(--orange),transparent 30%,var(--orange-2) 50%,transparent 75%,var(--orange));
+  animation:spin 3.5s linear infinite;filter:drop-shadow(0 0 12px var(--orange))}
+.avatar::after{content:"";position:absolute;inset:-1px;border-radius:50%;background:var(--bg)}
+.avatar img{position:relative;z-index:1;width:100%;height:100%;border-radius:50%;object-fit:cover}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.hero h1{font-size:clamp(2rem,8vw,2.8rem);font-weight:700}
+.hero h1 .accent{background:linear-gradient(90deg,var(--orange),var(--hot),var(--orange));-webkit-background-clip:text;background-clip:text;color:transparent;background-size:200% auto;animation:shine 3s linear infinite}
+@keyframes shine{to{background-position:200% center}}
+.tagline{color:var(--muted);margin:8px 0 6px;font-size:1rem}
+.loc{display:inline-flex;align-items:center;gap:6px;font-size:.82rem;color:var(--orange-2);background:rgba(255,122,26,.1);border:1px solid rgba(255,122,26,.25);padding:4px 12px;border-radius:999px;margin-bottom:26px}
+.loc .dot{width:7px;height:7px;border-radius:50%;background:var(--orange);box-shadow:0 0 0 0 var(--orange);animation:ping 1.8s infinite}
+@keyframes ping{70%{box-shadow:0 0 0 8px rgba(255,122,26,0)}100%{box-shadow:0 0 0 0 rgba(255,122,26,0)}}
+
+.links{display:flex;flex-direction:column;gap:12px}
+.link{--x:50%;--y:50%;position:relative;display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:16px;
+  background:rgba(35,37,42,.72);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--line);
+  text-align:left;overflow:hidden;transition:transform .25s cubic-bezier(.2,.8,.2,1),border-color .25s,box-shadow .25s;
+  opacity:0;transform:translateY(24px);animation:rise .7s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:calc(.25s + var(--i)*.09s)}
+.link::before{content:"";position:absolute;inset:0;background:radial-gradient(220px circle at var(--x) var(--y),rgba(255,122,26,.22),transparent 60%);opacity:0;transition:opacity .3s}
+.link::after{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.08),transparent);transform:skewX(-20deg);transition:left .7s}
+.link:hover,.link:focus-visible{border-color:rgba(255,122,26,.55);box-shadow:0 10px 30px -10px rgba(255,122,26,.45);transform:translateY(-2px)}
+.link:hover::before,.link:focus-visible::before{opacity:1}
+.link:hover::after{left:120%}
+.link:active{transform:scale(.98)}
+.link .ic{flex:none;width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(140deg,var(--orange),#d9480f);box-shadow:inset 0 1px 0 rgba(255,255,255,.25)}
+.link .ic svg{width:22px;height:22px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.link .tx{flex:1;min-width:0;position:relative}
+.link .tx b{display:block;font-weight:600;font-size:.98rem}
+.link .tx small{display:block;color:var(--muted);font-size:.8rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.link .arr{flex:none;width:18px;height:18px;stroke:var(--muted);fill:none;stroke-width:2;transition:transform .25s,stroke .25s;position:relative}
+.link:hover .arr{transform:translateX(4px);stroke:var(--orange)}
+@keyframes rise{to{opacity:1;transform:none}}
+
+.socials{display:flex;justify-content:center;gap:14px;margin-top:24px;opacity:0;animation:rise .7s forwards;animation-delay:1s}
+.socials a{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--line);background:var(--card);transition:transform .25s,background .25s,border-color .25s}
+.socials a:hover{transform:translateY(-3px) rotate(-6deg);background:var(--orange);border-color:var(--orange)}
+.socials svg{width:20px;height:20px;fill:#fff}
+
+.scroll{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;color:var(--muted);font-size:.72rem;letter-spacing:.15em;text-transform:uppercase}
+.scroll i{width:22px;height:36px;border:2px solid var(--muted);border-radius:12px;position:relative}
+.scroll i::after{content:"";position:absolute;left:50%;top:6px;width:4px;height:8px;border-radius:2px;background:var(--orange);transform:translateX(-50%);animation:wheel 1.6s infinite}
+@keyframes wheel{0%{opacity:1;top:6px}100%{opacity:0;top:20px}}
+
+/* ---------- MARQUEE ---------- */
+.marquee{position:relative;border-block:1px solid var(--line);background:var(--bg-2);overflow:hidden;padding:16px 0;transform:rotate(-2deg) scale(1.04);margin:24px 0 40px}
+.marquee .track{display:flex;gap:28px;width:max-content;animation:slide 26s linear infinite}
+.marquee span{font-family:"Space Grotesk";font-weight:700;font-size:clamp(1.2rem,4vw,1.8rem);text-transform:uppercase;white-space:nowrap;display:flex;align-items:center;gap:28px}
+.marquee span:nth-child(even){color:transparent;-webkit-text-stroke:1px var(--orange)}
+.marquee span::after{content:"✦";color:var(--orange);-webkit-text-stroke:0}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+/* ---------- SECTIONS ---------- */
+section.block{padding:72px 0}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;color:var(--orange);font-size:.78rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;margin-bottom:14px}
+.eyebrow::before{content:"";width:24px;height:2px;background:var(--orange)}
+h2{font-size:clamp(1.9rem,6vw,3.2rem);margin-bottom:18px}
+h2 em{font-style:normal;color:var(--orange)}
+.lead{color:var(--muted);font-size:1.05rem;max-width:620px}
+
+.about{display:grid;gap:36px;align-items:center}
+@media(min-width:860px){.about{grid-template-columns:1.1fr .9fr}}
+.about p+p{margin-top:14px}
+.badge-stack{position:relative;aspect-ratio:1;max-width:380px;width:100%;margin:0 auto}
+.badge-stack .ring{position:absolute;inset:0;border-radius:50%;border:1px dashed rgba(255,122,26,.35);animation:spin 40s linear infinite}
+.badge-stack .ring:nth-child(2){inset:14%;border-style:solid;border-color:var(--line);animation-direction:reverse;animation-duration:30s}
+.badge-stack .core{position:absolute;inset:26%;border-radius:50%;display:grid;place-items:center;text-align:center;
+  background:radial-gradient(circle at 30% 25%,#3a3d44,#1b1c20 70%);box-shadow:0 0 60px -10px rgba(255,122,26,.6),inset 0 2px 0 rgba(255,255,255,.08)}
+.badge-stack .core b{font-family:"Space Grotesk";font-size:clamp(1.1rem,4vw,1.5rem);display:block}
+.badge-stack .core small{color:var(--orange);font-size:.75rem;letter-spacing:.2em;text-transform:uppercase}
+.orbit{position:absolute;inset:0;animation:spin 18s linear infinite}
+.orbit span{position:absolute;top:-6px;left:50%;width:12px;height:12px;border-radius:50%;background:var(--orange);box-shadow:0 0 18px 4px var(--orange)}
+.flag{display:inline-flex;height:10px;width:18px;border-radius:2px;overflow:hidden;vertical-align:middle;margin-left:4px;flex-direction:column}
+.flag i{flex:1}.flag i:nth-child(1){background:#000}.flag i:nth-child(2){background:#dd0000}.flag i:nth-child(3){background:#ffce00}
+
+/* Cards */
+.grid{display:grid;gap:16px;margin-top:40px;grid-template-columns:1fr}
+@media(min-width:600px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:960px){.grid{grid-template-columns:repeat(3,1fr)}}
+.card{--x:50%;--y:50%;--rx:0deg;--ry:0deg;position:relative;padding:26px 22px;border-radius:var(--radius);background:linear-gradient(160deg,var(--card-2),var(--card));
+  border:1px solid var(--line);overflow:hidden;transform:perspective(900px) rotateX(var(--rx)) rotateY(var(--ry));transition:transform .2s ease-out,border-color .3s;transform-style:preserve-3d}
+.card::before{content:"";position:absolute;inset:0;background:radial-gradient(300px circle at var(--x) var(--y),rgba(255,122,26,.18),transparent 55%);opacity:0;transition:opacity .3s}
+.card:hover{border-color:rgba(255,122,26,.4)}
+.card:hover::before{opacity:1}
+.card .num{position:absolute;top:14px;right:18px;font-family:"Space Grotesk";font-weight:700;font-size:3.2rem;color:rgba(255,255,255,.04);line-height:1}
+.card .ic{width:52px;height:52px;border-radius:14px;display:grid;place-items:center;margin-bottom:18px;background:rgba(255,122,26,.12);border:1px solid rgba(255,122,26,.3);transition:transform .4s cubic-bezier(.2,.8,.2,1),background .3s}
+.card:hover .ic{transform:rotate(-8deg) scale(1.08);background:var(--orange)}
+.card .ic svg{width:26px;height:26px;fill:none;stroke:var(--orange);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;transition:stroke .3s}
+.card:hover .ic svg{stroke:#fff}
+.card h3{font-size:1.25rem;margin-bottom:8px;position:relative}
+.card p{color:var(--muted);font-size:.94rem;position:relative}
+.card .bar{position:absolute;left:0;bottom:0;height:3px;width:0;background:linear-gradient(90deg,var(--orange),var(--hot));transition:width .5s}
+.card:hover .bar{width:100%}
+.card.more{background:linear-gradient(140deg,#ff7a1a,#c2410c);border-color:transparent}
+.card.more p{color:rgba(255,255,255,.85)}
+.card.more .ic{background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.3)}
+.card.more .ic svg{stroke:#fff}
+.card.more .num{color:rgba(255,255,255,.12)}
+
+/* Materialien */
+.mats{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+.chip{padding:10px 16px;border-radius:999px;border:1px solid var(--line);background:var(--card);font-size:.9rem;display:inline-flex;align-items:center;gap:8px;transition:transform .25s,border-color .25s}
+.chip:hover{transform:translateY(-3px);border-color:var(--orange)}
+.chip i{width:10px;height:10px;border-radius:50%}
+
+/* Galerie */
+.gallery{columns:2;column-gap:12px;margin-top:36px}
+@media(min-width:860px){.gallery{columns:3;column-gap:16px}}
+.g{position:relative;break-inside:avoid;margin-bottom:12px;border-radius:18px;overflow:hidden;border:1px solid var(--line);background:var(--card)}
+.g img{width:100%;aspect-ratio:1;object-fit:cover;transition:transform .8s cubic-bezier(.2,.8,.2,1),filter .5s;filter:saturate(.9)}
+.g.tall img{aspect-ratio:2/3}
+.g::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 55%,rgba(0,0,0,.75));pointer-events:none}
+.g figcaption{position:absolute;left:12px;right:12px;bottom:10px;z-index:1;font-family:"Space Grotesk";font-weight:600;font-size:.92rem;transform:translateY(4px);transition:transform .4s}
+.g figcaption::before{content:"";display:block;width:18px;height:2px;background:var(--orange);margin-bottom:6px;transition:width .4s}
+.g:hover img{transform:scale(1.08);filter:saturate(1.15)}
+.g:hover figcaption{transform:none}
+.g:hover figcaption::before{width:40px}
+
+/* Stats */
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:40px}
+@media(min-width:860px){.stats{grid-template-columns:repeat(4,1fr)}}
+.stat{padding:24px 18px;border-radius:var(--radius);border:1px solid var(--line);background:var(--bg-2);text-align:center;position:relative;overflow:hidden}
+.stat::before{content:"";position:absolute;inset:-1px;border-radius:inherit;padding:1px;background:conic-gradient(from var(--a,0deg),transparent 70%,var(--orange));
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:border 4s linear infinite}
+@property --a{syntax:"<angle>";inherits:false;initial-value:0deg}
+@keyframes border{to{--a:360deg}}
+.stat b{display:block;font-family:"Space Grotesk";font-size:clamp(1.9rem,7vw,2.6rem);color:var(--orange);line-height:1.1}
+.stat small{color:var(--muted);font-size:.85rem}
+
+/* Prozess */
+.steps{position:relative;margin-top:40px;display:grid;gap:18px}
+.steps::before{content:"";position:absolute;left:23px;top:10px;bottom:10px;width:2px;background:var(--line)}
+.steps .fill{position:absolute;left:23px;top:10px;width:2px;height:0;background:linear-gradient(var(--orange),var(--hot));box-shadow:0 0 12px var(--orange);transition:height .2s linear}
+.step{position:relative;display:flex;gap:18px;align-items:flex-start}
+.step .n{flex:none;width:48px;height:48px;border-radius:50%;display:grid;place-items:center;font-family:"Space Grotesk";font-weight:700;background:var(--card);border:2px solid var(--line);position:relative;z-index:1;transition:all .4s}
+.step.on .n{background:var(--orange);border-color:var(--orange);box-shadow:0 0 0 6px rgba(255,122,26,.15),0 0 24px rgba(255,122,26,.6)}
+.step .c{padding:12px 0}
+.step h3{font-size:1.15rem;margin-bottom:4px}
+.step p{color:var(--muted);font-size:.94rem}
+
+/* CTA */
+.cta{position:relative;border-radius:28px;padding:48px 24px;text-align:center;overflow:hidden;background:radial-gradient(120% 140% at 50% 0%,#3a2414 0%,var(--bg-2) 55%);border:1px solid rgba(255,122,26,.25)}
+.cta h2{margin-bottom:12px}
+.cta .lead{margin:0 auto 28px}
+.btns{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:999px;font-weight:600;transition:transform .25s,box-shadow .25s,background .25s}
+.btn svg{width:18px;height:18px}
+.btn.primary{background:var(--orange);color:#fff;box-shadow:0 10px 30px -8px rgba(255,122,26,.7)}
+.btn.primary:hover{transform:translateY(-3px);box-shadow:0 16px 40px -8px rgba(255,122,26,.9)}
+.btn.ghost{border:1px solid var(--line);background:rgba(255,255,255,.03)}
+.btn.ghost:hover{border-color:var(--orange);transform:translateY(-3px)}
+.btn.primary svg{fill:#fff}.btn.ghost svg{fill:none;stroke:currentColor;stroke-width:2}
+
+footer{padding:40px 0 calc(32px + env(safe-area-inset-bottom));text-align:center;color:var(--muted);font-size:.85rem;border-top:1px solid var(--line);margin-top:40px}
+footer b{color:var(--text)}
+footer .heart{color:var(--orange);display:inline-block;animation:beat 1.2s infinite}
+@keyframes beat{0%,100%{transform:scale(1)}15%{transform:scale(1.25)}30%{transform:scale(1)}}
+
+/* Reveal */
+.rv{opacity:0;transform:translateY(40px);transition:opacity .9s cubic-bezier(.2,.8,.2,1),transform .9s cubic-bezier(.2,.8,.2,1);transition-delay:var(--d,0s)}
+.rv.in{opacity:1;transform:none}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001s!important;animation-iteration-count:1!important;transition-duration:.001s!important}
+  .rv{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+<main>
+
+<!-- ============ HERO / LINKS ============ -->
+<header class="hero">
+  <canvas id="sparks" aria-hidden="true"></canvas>
+  <div class="glow" aria-hidden="true"></div>
+  <div class="profile">
+    <div class="avatar"><img src="assets/logo.jpg" alt="Fischer Steelworx Logo" width="150" height="150"></div>
+    <h1>Fischer <span class="accent">Steelworx</span></h1>
+    <p class="tagline">Hobby-Schweißkunst aus Hermaringen</p>
+    <span class="loc"><span class="dot"></span>Handgemacht in Deutschland</span>
+
+    <nav class="links" aria-label="Links">
+      <a class="link" style="--i:0" href="https://ko-fi.com/fischersteelworx" target="_blank" rel="noopener">
+        <span class="ic"><svg viewBox="0 0 24 24"><path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/><path d="M8 2v2M12 2v2"/></svg></span>
+        <span class="tx"><b>Projekte unterstützen</b><small>Ko-fi · Spendier mir einen Kaffee</small></span>
+        <svg class="arr" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <a class="link" style="--i:1" href="https://www.vinted.de/member/187433255" target="_blank" rel="noopener">
+        <span class="ic"><svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18M16 10a4 4 0 0 1-8 0"/></svg></span>
+        <span class="tx"><b>Vinted-Shop</b><small>Stücke zum Kaufen</small></span>
+        <svg class="arr" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <a class="link" style="--i:2" href="https://whatsapp.com/channel/0029Vb5vtiTEFeXh0fPpLi3S" target="_blank" rel="noopener">
+        <span class="ic"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-12.3 7.5L3 21l2-5.5A8.4 8.4 0 1 1 21 11.5Z"/></svg></span>
+        <span class="tx"><b>WhatsApp-Kanal</b><small>Neue Projekte zuerst sehen</small></span>
+        <svg class="arr" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <a class="link" style="--i:3" href="https://www.tiktok.com/@steffenfischer1" target="_blank" rel="noopener">
+        <span class="ic"><svg viewBox="0 0 24 24"><path d="M9 12a4 4 0 1 0 4 4V3c.5 2.5 2.5 4.5 5 5"/></svg></span>
+        <span class="tx"><b>TikTok</b><small>Funken, Stahl &amp; Werkstatt-Videos</small></span>
+        <svg class="arr" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <a class="link" style="--i:4" href="https://maps.app.goo.gl/iCfju89QsigVorbU9" target="_blank" rel="noopener">
+        <span class="ic"><svg viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></span>
+        <span class="tx"><b>So findest du mich</b><small>Google Maps · Hermaringen</small></span>
+        <svg class="arr" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <a class="link" style="--i:5" href="https://g.page/r/Ceda9flHtgAZEBM/review" target="_blank" rel="noopener">
+        <span class="ic"><svg viewBox="0 0 24 24"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1Z"/></svg></span>
+        <span class="tx"><b>Bewertung auf Google</b><small>Erzähl anderen, wie's dir gefällt</small></span>
+        <svg class="arr" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </nav>
+
+    <div class="socials">
+      <a href="https://tiktok.com/@fischersteelworx" target="_blank" rel="noopener" aria-label="TikTok @fischersteelworx">
+        <svg viewBox="0 0 24 24"><path d="M19.6 6.7a4.8 4.8 0 0 1-3.8-4.2V2h-3.4v13.4a2.9 2.9 0 1 1-2-2.7V9.2a6.3 6.3 0 1 0 5.4 6.2V8.6a8.2 8.2 0 0 0 3.8 1V6.7Z"/></svg>
+      </a>
+      <a href="#kontakt" data-wa target="_blank" rel="noopener" aria-label="WhatsApp-Nachricht schreiben">
+        <svg viewBox="0 0 24 24"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1s-.5-.1-.7.1-.8 1-.9 1.2-.3.2-.6.1a8.2 8.2 0 0 1-4-3.5c-.3-.5.3-.5.9-1.6.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6a1.1 1.1 0 0 0-.8.4 3.4 3.4 0 0 0-1 2.5 5.9 5.9 0 0 0 1.2 3.1 13.4 13.4 0 0 0 5.2 4.6c1.9.8 2.7.9 3.6.7a3.1 3.1 0 0 0 2-1.4 2.5 2.5 0 0 0 .2-1.4c-.1-.2-.3-.3-.6-.4ZM12 21.8a9.8 9.8 0 0 1-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4A9.8 9.8 0 1 1 12 21.8Zm8.4-18.3A11.8 11.8 0 0 0 1.8 17.7L.1 24l6.4-1.7A11.8 11.8 0 0 0 24 12a11.7 11.7 0 0 0-3.6-8.5Z"/></svg>
+      </a>
+    </div>
+  </div>
+  <a class="scroll" href="#werkstatt" aria-label="Weiter nach unten"><i></i>Mehr</a>
+</header>
+
+<div class="marquee" aria-hidden="true">
+  <div class="track">
+    <span>Schweißen</span><span>Metallkunst</span><span>Laserbeschriftung</span><span>Leder</span><span>Holz &amp; Stein</span><span>Unikate</span>
+    <span>Schweißen</span><span>Metallkunst</span><span>Laserbeschriftung</span><span>Leder</span><span>Holz &amp; Stein</span><span>Unikate</span>
+  </div>
+</div>
+
+<!-- ============ ÜBER ============ -->
+<section class="block" id="werkstatt">
+  <div class="wrap about">
+    <div>
+      <span class="eyebrow rv">Die Werkstatt</span>
+      <h2 class="rv" style="--d:.05s">Handgemacht.<br>Mit <em>Liebe</em> &amp; Eisen.</h2>
+      <p class="lead rv" style="--d:.1s">Hinter Fischer Steelworx steckt keine Fabrik, sondern eine kleine Werkstatt in Hermaringen – und jemand, der für Funken, Stahl und gutes Handwerk brennt.</p>
+      <p class="lead rv" style="--d:.15s">Jedes Stück entsteht von Hand, Schweißnaht für Schweißnaht. Kombiniert mit ehrlichen Naturmaterialien wie Holz, Leder und Stein wird aus rohem Eisen etwas, das bleibt. Keine Massenware – echte Unikate, gemacht in Deutschland <span class="flag" aria-label="Deutschland"><i></i><i></i><i></i></span></p>
+    </div>
+    <div class="badge-stack rv" style="--d:.2s" aria-hidden="true">
+      <div class="ring"></div><div class="ring"></div>
+      <div class="orbit"><span></span></div>
+      <div class="core"><div><small>Mit Herzblut</small><b>Made in<br>Germany</b></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LEISTUNGEN ============ -->
+<section class="block" id="handwerk">
+  <div class="wrap">
+    <span class="eyebrow rv">Was ich mache</span>
+    <h2 class="rv" style="--d:.05s">Vom Funken zum <em>Unikat</em></h2>
+    <p class="lead rv" style="--d:.1s">Ob Deko, Geschenk oder Gebrauchsstück – hier ein Blick auf das, was in der Werkstatt entsteht.</p>
+
+    <div class="grid">
+      <article class="card tilt rv">
+        <span class="num">01</span>
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="m14 4 6 6M4 20l7-7"/><path d="m12.5 5.5 6 6-3 3-6-6Z"/><path d="M3 14l1 1M6 18l1 1M2 18h2M5 21v-2"/></svg></div>
+        <h3>Schweißen</h3>
+        <p>Das Herzstück. Stahl verbinden, formen und zu stabilen, langlebigen Stücken zusammenfügen.</p>
+        <span class="bar"></span>
+      </article>
+      <article class="card tilt rv" style="--d:.08s">
+        <span class="num">02</span>
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 2v6M12 8l-3 9h6Z"/><path d="M4 21h16"/><path d="M8 17h8"/><path d="m5 5 2 2M19 5l-2 2"/></svg></div>
+        <h3>Laserbeschriftung</h3>
+        <p>Namen, Logos, Sprüche oder Motive – präzise und dauerhaft in Metall, Holz und Leder graviert.</p>
+        <span class="bar"></span>
+      </article>
+      <article class="card tilt rv" style="--d:.16s">
+        <span class="num">03</span>
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3 4 9l3 12h10l3-12Z"/><path d="M12 3v18M4 9h16"/></svg></div>
+        <h3>Metallkunst</h3>
+        <p>Skulpturen, Deko und Wandkunst aus Eisen und Stahl – rau, kantig und voller Charakter.</p>
+        <span class="bar"></span>
+      </article>
+      <article class="card tilt rv">
+        <span class="num">04</span>
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M5 4h14l1 5-2 11H6L4 9Z"/><path d="M8 9h8M9 13h6"/><path d="M7 4v-1M17 4v-1"/></svg></div>
+        <h3>Leder</h3>
+        <p>Handgenähte Lederarbeiten, die perfekt zu Stahl passen – robust, natürlich und mit der Zeit schöner.</p>
+        <span class="bar"></span>
+      </article>
+      <article class="card tilt rv" style="--d:.08s">
+        <span class="num">05</span>
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 22V12"/><path d="M12 12c0-5 3-8 8-9-1 5-4 8-8 9Z"/><path d="M12 15c0-3-2-6-7-7 .5 4 3 7 7 7Z"/></svg></div>
+        <h3>Naturmaterialien</h3>
+        <p>Holz, Stein, Leder und Eisen – ehrliche Materialien, die zusammen etwas Besonderes ergeben.</p>
+        <span class="bar"></span>
+      </article>
+      <article class="card tilt more rv" style="--d:.16s">
+        <span class="num">+</span>
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></div>
+        <h3>…und vieles mehr</h3>
+        <p>Eine Idee im Kopf? Individuelle Geschenke und Auftragsarbeiten – einfach anfragen.</p>
+        <span class="bar"></span>
+      </article>
+    </div>
+
+    <div class="mats rv" aria-label="Materialien">
+      <span class="chip"><i style="background:#6b7280"></i>Eisen</span>
+      <span class="chip"><i style="background:#94a3b8"></i>Stahl</span>
+      <span class="chip"><i style="background:#8b5a2b"></i>Holz</span>
+      <span class="chip"><i style="background:#a16207"></i>Leder</span>
+      <span class="chip"><i style="background:#78716c"></i>Stein</span>
+      <span class="chip"><i style="background:var(--orange)"></i>Funken</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GALERIE ============ -->
+<section class="block" id="galerie">
+  <div class="wrap">
+    <span class="eyebrow rv">Aus der Werkstatt</span>
+    <h2 class="rv" style="--d:.05s">Ein paar <em>Stücke</em></h2>
+    <p class="lead rv" style="--d:.1s">Hufeisen, Schrauben, Besteck – was andere wegwerfen, bekommt hier ein zweites Leben.</p>
+    <div class="gallery">
+      <figure class="g tall rv"><img src="assets/herz.jpg" alt="Herz aus Schrauben und Muttern mit Teelicht" loading="lazy"><figcaption>Schrauben-Herz</figcaption></figure>
+      <figure class="g rv" style="--d:.08s"><img src="assets/eule.jpg" alt="Eule aus Hufeisen" loading="lazy"><figcaption>Hufeisen-Eule</figcaption></figure>
+      <figure class="g rv" style="--d:.16s"><img src="assets/hase.jpg" alt="Hase aus Hufeisen und Besteck" loading="lazy"><figcaption>Besteck-Hase</figcaption></figure>
+      <figure class="g tall rv"><img src="assets/kerze.jpg" alt="Kerzenständer aus Metallteilen" loading="lazy"><figcaption>Industrie-Kerzenhalter</figcaption></figure>
+      <figure class="g tall rv" style="--d:.08s"><img src="assets/eule2.jpg" alt="Hufeisen-Eule mit Windlicht" loading="lazy"><figcaption>Eulen-Windlicht</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STATS ============ -->
+<section class="block">
+  <div class="wrap">
+    <span class="eyebrow rv">Werte</span>
+    <h2 class="rv" style="--d:.05s">Ehrliches <em>Handwerk</em></h2>
+    <div class="stats">
+      <div class="stat rv"><b><span data-count="100">0</span>%</b><small>Handarbeit</small></div>
+      <div class="stat rv" style="--d:.08s"><b><span data-count="1">0</span>&nbsp;von&nbsp;1</b><small>Jedes Stück ein Unikat</small></div>
+      <div class="stat rv" style="--d:.16s"><b>1.500&nbsp;°C</b><small>Hitze für Ideen</small></div>
+      <div class="stat rv" style="--d:.24s"><b>∞</b><small>Liebe zum Detail</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROZESS ============ -->
+<section class="block">
+  <div class="wrap">
+    <span class="eyebrow rv">So entsteht's</span>
+    <h2 class="rv" style="--d:.05s">Von der Idee <em>zum Stück</em></h2>
+    <div class="steps" id="steps">
+      <span class="fill"></span>
+      <div class="step rv"><span class="n">1</span><div class="c"><h3>Idee</h3><p>Alles beginnt mit einer Skizze im Kopf – oder deinem Wunsch.</p></div></div>
+      <div class="step rv"><span class="n">2</span><div class="c"><h3>Material</h3><p>Stahl, Holz, Leder oder Stein: Das passende Material wird ausgesucht und zugeschnitten.</p></div></div>
+      <div class="step rv"><span class="n">3</span><div class="c"><h3>Schweißen &amp; Formen</h3><p>Jetzt fliegen die Funken. Teile werden geschweißt, gebogen und in Form gebracht.</p></div></div>
+      <div class="step rv"><span class="n">4</span><div class="c"><h3>Feinschliff</h3><p>Schleifen, Gravieren, Veredeln – bis jedes Detail sitzt.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section class="block" id="kontakt">
+  <div class="wrap">
+    <div class="cta rv">
+      <span class="eyebrow">Lust auf ein Unikat?</span>
+      <h2>Lass uns was <em>schweißen</em>.</h2>
+      <p class="lead">Fragen, Wünsche oder eine Idee für ein Geschenk? Schreib einfach per WhatsApp.</p>
+      <div class="btns">
+        <a class="btn primary" href="#kontakt" data-wa target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15l-1.4 5 5.1-1.3A10 10 0 1 0 12 2Z"/></svg>Nachricht schreiben
+        </a>
+        <a class="btn ghost" href="https://www.vinted.de/member/187433255" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/></svg>Zum Shop
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><b>Fischer Steelworx</b> · Hermaringen</p>
+    <p>Handgemacht mit <span class="heart">♥</span> in Deutschland · © <span id="y"></span></p>
+  </div>
+</footer>
+
+<script>
+document.getElementById('y').textContent = new Date().getFullYear();
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ---------- Schweißfunken ---------- */
+(() => {
+  const c = document.getElementById('sparks'), x = c.getContext('2d');
+  let w, h, dpr, sparks = [], src = {x:0,y:0}, t = 0;
+  const colors = ['#fff6d5','#ffe2a8','#ffb347','#ff7a1a','#ff5a00'];
+  function size(){
+    dpr = Math.min(devicePixelRatio || 1, 2);
+    w = c.clientWidth; h = c.clientHeight;
+    c.width = w*dpr; c.height = h*dpr; x.setTransform(dpr,0,0,dpr,0,0);
+  }
+  size(); addEventListener('resize', size);
+
+  // Mehrere „Schweißpunkte“, zwischen denen der Brenner wandert
+  const spots = () => [
+    {x:w*.5 + 72, y:118}, {x:w*.1, y:Math.min(h*.35, 300)},
+    {x:w*.9, y:70}
+  ];
+  let target = 0, burst = 0;
+  setInterval(() => { target = (target+1) % 3; burst = 25; }, 3200);
+
+  function emit(px, py, n, power){
+    for(let i=0;i<n;i++){
+      const a = -Math.PI/2 + (Math.random()-.5)*Math.PI*1.6;
+      const v = (Math.random()*5 + 2) * power;
+      sparks.push({x:px, y:py, px, py, vx:Math.cos(a)*v, vy:Math.sin(a)*v,
+        life:1, decay:.008 + Math.random()*.018, c:colors[(Math.random()*colors.length)|0],
+        s:Math.random()*1.6 + .6, bounce:Math.random()<.5});
+    }
+  }
+
+  function frame(){
+    t++;
+    x.globalCompositeOperation = 'source-over';
+    x.clearRect(0,0,w,h);
+    x.globalCompositeOperation = 'lighter';
+
+    const s = spots()[target];
+    src.x += (s.x - src.x) * .04; src.y += (s.y - src.y) * .04;
+    const flick = Math.random();
+
+    // Lichtbogen-Glühen
+    const r = 30 + flick*40;
+    const g = x.createRadialGradient(src.x, src.y, 0, src.x, src.y, r);
+    g.addColorStop(0,'rgba(255,255,240,.9)'); g.addColorStop(.25,'rgba(255,180,80,.45)'); g.addColorStop(1,'rgba(255,90,0,0)');
+    x.fillStyle = g; x.beginPath(); x.arc(src.x, src.y, r, 0, 7); x.fill();
+
+    if(!reduce){
+      emit(src.x, src.y, burst > 0 ? 14 : (flick > .3 ? 4 : 1), burst > 0 ? 1.4 : 1);
+      if(burst > 0) burst--;
+    }
+
+    for(let i = sparks.length-1; i >= 0; i--){
+      const p = sparks[i];
+      p.px = p.x; p.py = p.y;
+      p.vy += .12; p.vx *= .992; p.vy *= .992;
+      p.x += p.vx; p.y += p.vy;
+      if(p.bounce && p.y > h-4 && p.vy > 0){ p.y = h-4; p.vy *= -.35; p.vx *= .7; }
+      p.life -= p.decay;
+      if(p.life <= 0 || p.x < -20 || p.x > w+20 || p.y > h+20){ sparks.splice(i,1); continue; }
+      x.strokeStyle = p.c; x.globalAlpha = Math.max(p.life,0);
+      x.lineWidth = p.s; x.lineCap = 'round';
+      x.beginPath(); x.moveTo(p.px - p.vx*1.5, p.py - p.vy*1.5); x.lineTo(p.x, p.y); x.stroke();
+    }
+    x.globalAlpha = 1;
+    if(sparks.length > 900) sparks.splice(0, sparks.length-900);
+    requestAnimationFrame(frame);
+  }
+  src = {...spots()[0]};
+  requestAnimationFrame(frame);
+
+  // Tippen/Klicken im Hero = Funkenregen
+  document.querySelector('.hero').addEventListener('pointerdown', e => {
+    const b = c.getBoundingClientRect();
+    emit(e.clientX - b.left, e.clientY - b.top, 60, 1.3);
+  });
+})();
+
+/* ---------- WhatsApp-Links (Nummer nicht als Klartext im HTML) ---------- */
+(() => {
+  const n = ['72087','80867','194'].join('').split('').reverse().join('');
+  document.querySelectorAll('[data-wa]').forEach(a => a.href = 'https://api.whatsapp.com/send?phone=' + n);
+})();
+
+/* ---------- Spotlight auf Links & Cards ---------- */
+document.querySelectorAll('.link, .card').forEach(el => {
+  el.addEventListener('pointermove', e => {
+    const r = el.getBoundingClientRect(), mx = e.clientX - r.left, my = e.clientY - r.top;
+    el.style.setProperty('--x', mx + 'px'); el.style.setProperty('--y', my + 'px');
+    if(el.classList.contains('tilt') && e.pointerType === 'mouse' && !reduce){
+      el.style.setProperty('--ry', ((mx / r.width) - .5) * 10 + 'deg');
+      el.style.setProperty('--rx', ((my / r.height) - .5) * -10 + 'deg');
+    }
+  });
+  el.addEventListener('pointerleave', () => { el.style.setProperty('--rx','0deg'); el.style.setProperty('--ry','0deg'); });
+});
+
+/* ---------- Scroll-Reveal + Zähler ---------- */
+const io = new IntersectionObserver(es => es.forEach(e => {
+  if(!e.isIntersecting) return;
+  e.target.classList.add('in');
+  e.target.querySelectorAll('[data-count]').forEach(n => {
+    const end = +n.dataset.count, t0 = performance.now();
+    const tick = now => { const k = Math.min((now - t0) / 1400, 1); n.textContent = Math.round(end * (1 - Math.pow(1-k, 3))); if(k < 1) requestAnimationFrame(tick); };
+    requestAnimationFrame(tick);
+  });
+  io.unobserve(e.target);
+}), {threshold:.15, rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.rv').forEach(el => io.observe(el));
+
+/* ---------- Prozess-Linie füllt sich beim Scrollen ---------- */
+const steps = document.getElementById('steps'), fill = steps.querySelector('.fill'), items = [...steps.querySelectorAll('.step')];
+function progress(){
+  const r = steps.getBoundingClientRect(), mid = innerHeight * .6;
+  const p = Math.min(Math.max((mid - r.top) / (r.height - 20), 0), 1);
+  fill.style.height = p * (r.height - 20) + 'px';
+  items.forEach(s => s.classList.toggle('on', s.getBoundingClientRect().top + 24 < mid));
+}
+addEventListener('scroll', progress, {passive:true}); progress();
+</script>
+</body>
+</html>
